@@ -1,0 +1,45 @@
+{% extends 'flatpages/default.html' %}
+
+
+{% block title %}
+Posts
+{% endblock title %}
+
+{% block content %}
+   <h1>Все статьи и новости</h1>
+   <!-- Вот так выглядело использование переменной и фильтра -->
+   <!-- <h3>{{ time_now|date:'M d Y' }}</h3> -->
+   <!-- А вот так мы используем наш тег-->
+   <h3>{{ time_now|date:'b d Y' }}</h3>
+   <h3>{{ posts|length }}</h3>
+   <h3>  </h3>
+
+   <hr>
+   {% if posts %}
+       <table>
+           <tr>
+<!--               <td>Автор статьи</td>-->
+<!--               <td>Статья/новость</td>-->
+               <td>Заголовок статьи</td>
+               <td>Дата создания</td>
+               <td>Текст статьи</td>
+<!--               <td>Рейтинг статьи</td>-->
+
+           </tr>
+
+           {% for post in posts %}
+           <tr>
+<!--               <td>{{ post.author.user }}</td>-->
+<!--               <td>{{ post.post_type }}</td>-->
+               <td>{{ post.title }}</td>
+               <td>{{ post.created_at|date:'d.m.Y' }}</td>
+               <td>{{ post.text|truncatewords:20 }}</td>
+<!--               <td>{{ post.rating }}</td>-->
+           </tr>
+           {% endfor %}
+
+       </table>
+   {% else %}
+       <h2>Новостей и статей нет!</h2>
+   {% endif %}
+{% endblock content %}
